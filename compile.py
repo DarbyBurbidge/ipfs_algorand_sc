@@ -5,6 +5,8 @@ from pyteal_helpers import program
 
 if __name__ == "__main__":
     mod = sys.argv[1]
+    
+    print(sys.argv)
 
     try:
         approval_out = sys.argv[2]
