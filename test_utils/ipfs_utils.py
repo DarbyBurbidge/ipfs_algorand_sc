@@ -2,11 +2,6 @@ import base58
 import binascii
 
 
-def ipfsCIDtoB32(cid):
-    if (len(cid) != 46 or cid.index('Qm') != 0):
-        raise Exception("{} is an invalid CID. Must be 46 characters long and start with 'Qm'".format(cid))
-    return cid
-
 def ipfscidv0_to_byte32(cid):
     """
     Convert ipfscidv0 to 32 bytes hex string.

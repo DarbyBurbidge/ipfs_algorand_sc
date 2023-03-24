@@ -63,7 +63,8 @@ def get_global_state(client, address, app_id):
     output = {}
     created_apps = account_info['created-apps']
     for app in created_apps:
-        if app['id'] == app_id:
+        if app['id'] == app_id and 'global-state' in app['params']:
+            print(app)
             for key_value in app['params']['global-state']:
                 if key_value['value']['type'] == 1:
                     value = key_value['value']['bytes']
@@ -71,6 +72,8 @@ def get_global_state(client, address, app_id):
                     value = key_value['value']['uint']
                 output[base64.b64decode(key_value['key']).decode()] = value
             return output
+        else:
+            return None
 
 def get_local_state(client, address, app_id):
     account_info = client.account_info(address)

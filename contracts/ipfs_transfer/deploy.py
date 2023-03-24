@@ -43,7 +43,7 @@ def deploy_ipfs_app(client, priv_key, approval_prog, clear_prog, global_schema, 
     return app_id
     
 
-def deploy_ipfs(algod_address, algod_token, creator_mnemonic, list_ipfs_keys):
+def deploy_ipfs(algod_address, algod_token, creator_mnemonic, num_items, sum_item_cost, list_ipfs_keys):
     priv_key = mnemonic.to_private_key(creator_mnemonic)
     algod_client = get_algod_client(algod_token, algod_address)
     
@@ -54,8 +54,12 @@ def deploy_ipfs(algod_address, algod_token, creator_mnemonic, list_ipfs_keys):
     local_schema = load_schema(file_path='local_schema')
     
     app_args = []
+    app_args.append(num_items)
+    app_args.append(sum_item_cost)
+
     for file_key in list_ipfs_keys:
         app_args.append(ipfscidv0_to_byte32(file_key))
+    print(app_args)
     
     app_id = deploy_ipfs_app(
         algod_client,
